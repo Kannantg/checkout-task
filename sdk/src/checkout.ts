@@ -19,7 +19,7 @@ class Checkout {
 
     private createIframe() {
         const iframe = document.createElement("iframe");
-        iframe.src = `http://localhost:3000/checkout?productId=${this.options?.productId}`;
+        iframe.src = `http://localhost:3000/?productId=${this.options?.productId}`;
         iframe.style.width = "100%";
         iframe.style.height = "100%";
         iframe.style.position = "fixed";
