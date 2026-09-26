@@ -3,11 +3,6 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-// interface Inputs {
-//     email: string;
-//     cardnum: string;
-// }
-
 interface Data {
     title: string;
     price: number
@@ -55,13 +50,11 @@ const CheckoutPage = () => {
         ));
     }
 
-    // console.log(inputs);
 
     const handleClick = async (e: any) => {
         e.preventDefault();
         const validateResult = validation(inputs);
 
-        console.log(validateResult);
         setIsError(validateResult);
 
         if (Object.keys(validateResult).length === 0) {
@@ -99,28 +92,6 @@ const CheckoutPage = () => {
                 } else {
                     setIsErrorStr(data.message);
                 }
-
-                // if (data.status === 400) {
-                //     setIsErrorStr(data.message);
-                // } else {
-
-                // }
-
-                // if (!response.ok) {
-                //     setIsErrorStr(data.message);
-                // }
-
-                // window.parent.postMessage({
-                //     type: "CHECKOUT_SUCCESS",
-                //     payload: {
-                //         sessionId: data.sessionId
-                //     }
-                // }, "*");
-
-                // setInputs({
-                //     email: "",
-                //     cardnum: ""
-                // });
 
             } catch (err) {
                 setIsErrorStr(err ? "Payment Failed. Something went wrong." : "");
@@ -187,8 +158,6 @@ const CheckoutPage = () => {
                             <div className="flex flex-col min-[400px]:flex-row gap-2 min-[400px]:gap-1 items-center justify-between">
                                 <p className="text-[15px] text-black">{isProdLoading ? "Loading..." : data?.title ? data.title : "Product name"}</p>
                                 <p className="text-[15px] text-black">{isProdLoading ? "Loading..." : data?.price ? "$" + data.price : "0.00"}</p>
-                                {/* <p className="text-[15px] text-black">Iphone 18 pro</p>
-                                <p className="text-[15px] text-black">1,50,000</p> */}
                             </div>
                         </div>
                         <form>

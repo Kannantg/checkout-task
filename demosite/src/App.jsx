@@ -8,17 +8,25 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products").then((res) => res.json()).then((res) => setData(res.products));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/products");
+        const data = await response.json();
+        setData(data.products);
+        setProdLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
-  // console.log(data);
+    fetchData();
+  }, []);
 
   const handleClick = (id) => {
     window.checkout.open({
       productId: id,
-      onSuccess: ({sessionId}) => {
+      onSuccess: ({ sessionId }) => {
         console.log(sessionId, "Merchant Site");
-        
       }
     });
   };
@@ -50,15 +58,6 @@ function App() {
             <tr></tr>
           </tbody>
         </table>
-        {/* {
-          data.map((item) => (
-            <div className="d-flex justify-content-evenly mb-4">
-              <p>{item.title}</p>
-              <p>{item.price}</p>
-              <button type="button" className="" onClick={() => handleClick(item.id)}>Buy</button>
-            </div>
-          ))
-        } */}
       </div>
     </section>
   )

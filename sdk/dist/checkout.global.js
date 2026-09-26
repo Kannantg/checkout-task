@@ -26,16 +26,24 @@ var Checkout = (() => {
           return;
         }
         const { type, payload } = event.data;
-        if (type === "CHECKOUT_SUCCESS") {
-          (_b = (_a = this.options) == null ? void 0 : _a.onSuccess) == null ? void 0 : _b.call(_a, payload);
-          this.close();
-        }
-        if (type === "CHECKOUT_CLOSED") {
-          (_d = (_c = this.options) == null ? void 0 : _c.onClose) == null ? void 0 : _d.call(_c, payload);
-          this.close();
-        }
-        if (type === "CHECKOUT_ERROR") {
-          (_f = (_e = this.options) == null ? void 0 : _e.onError) == null ? void 0 : _f.call(_e, payload);
+        switch (type) {
+          case "CHECKOUT_SUCCESS":
+            try {
+              (_b = (_a = this.options) == null ? void 0 : _a.onSuccess) == null ? void 0 : _b.call(_a, payload);
+            } finally {
+              this.close();
+            }
+            break;
+          case "CHECKOUT_CLOSED":
+            try {
+              (_d = (_c = this.options) == null ? void 0 : _c.onClose) == null ? void 0 : _d.call(_c, payload);
+            } finally {
+              this.close();
+            }
+            break;
+          case "CHECKOUT_ERROR":
+            (_f = (_e = this.options) == null ? void 0 : _e.onError) == null ? void 0 : _f.call(_e, payload);
+            break;
         }
       };
     }
@@ -47,6 +55,7 @@ var Checkout = (() => {
     createIframe() {
       var _a;
       const iframe = document.createElement("iframe");
+      iframe.id = "checkoutIframe";
       iframe.src = `https://checkout-page-modal.vercel.app/?productId=${(_a = this.options) == null ? void 0 : _a.productId}`;
       iframe.style.width = "100%";
       iframe.style.height = "100%";
@@ -57,10 +66,13 @@ var Checkout = (() => {
       this.iframe = iframe;
     }
     close() {
-      var _a;
-      (_a = this.iframe) == null ? void 0 : _a.remove();
+      const iframe = document.getElementById("checkoutIframe");
+      if (iframe) {
+        iframe.remove();
+      }
       this.iframe = null;
       window.removeEventListener("message", this.handleMessage);
+      this.options = null;
     }
   };
   var checkout = new Checkout();
