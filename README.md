@@ -74,15 +74,9 @@ checkout.open({
 
 ## Communication
 
-The SDKcreates an iframe containing the Next.js checkout app.
+The SDK creates an iframe containing the Next.js checkout app.
 
-Merchant Website
-      ↓
-Checkout SDK
-      ↓
-iframe
-      ↓
-Next.js Checkout
+Merchant Website → Checkout SDK → iframe → Next.js Checkout
 
 
 The SDK sends data to the checkout using:
@@ -105,7 +99,7 @@ window.addEventListener("message")
 
 ### Message Flow
 
-text
+
 SDK → Checkout
 
 Checkout → SDK
@@ -116,7 +110,7 @@ CHECKOUT_CLOSED
 
 The SDK converts these messages into merchant callbacks:
 
-text
+
 PAYMENT_SUCCESS → onSuccess()
 PAYMENT_ERROR   → onError()
 CHECKOUT_CLOSED  → onClose()
