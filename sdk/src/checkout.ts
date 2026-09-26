@@ -19,7 +19,8 @@ class Checkout {
 
     private createIframe() {
         const iframe = document.createElement("iframe");
-        iframe.src = `http://localhost:3000/?productId=${this.options?.productId}`;
+        iframe.src = `https://checkout-page-modal.vercel.app/?productId=${this.options?.productId}`;
+        // iframe.src = `http://localhost:3000/?productId=${this.options?.productId}`;
         iframe.style.width = "100%";
         iframe.style.height = "100%";
         iframe.style.position = "fixed";
@@ -33,7 +34,7 @@ class Checkout {
     }
 
     private handleMessage = (event: MessageEvent) => {
-        if (event.origin !== "http://localhost:3000") {
+        if (event.origin !== "https://checkout-page-modal.vercel.app/") {
             return;
         }
 
