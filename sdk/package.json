@@ -1,0 +1,20 @@
+{
+  "name": "sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tusp --watch",
+    "serve": "serve dist -l 5000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "serve": "^14.2.6",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2"
+  }
+}
